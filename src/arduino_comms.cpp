@@ -53,9 +53,18 @@ void ArduinoComms::readEncoderValues(int&, int&)
 
 void ArduinoComms::setMotorValues(int val_1, int val_2)
 {
+    int left_motor_signal = -1*val_1;
+    int right_motor_signal = -1*val_2;
 
-    int left_motor_signal = val_1;
-    int right_motor_signal = val_2;
+    // if ((val_1 > 0 && val_2 > 0) || (val_1 < 0 && val_2 < 0)) {
+    //     left_motor_signal = -1*val_1;
+    //     right_motor_signal = -1*val_2;
+    // }
+    // else {
+    //     left_motor_signal = -3*val_1;
+    //     right_motor_signal = -3*val_2;
+    // }
+
 
     if(left_motor_signal < 0) {
         gpioWrite(LEFT_IN_1, 0);
@@ -87,14 +96,11 @@ void ArduinoComms::setMotorValues(int val_1, int val_2)
         right_motor_signal = 255;
     }
 
-    gpioPWM(LEFT_WHEEL_GPIO_PIN, left_motor_signal); // 50% of 255
-    gpioPWM(RIGHT_WHEEL_GPIO_PIN, right_motor_signal); // 50% of 255
+    gpioPWM(LEFT_WHEEL_GPIO_PIN, left_motor_signal); 
+    gpioPWM(RIGHT_WHEEL_GPIO_PIN, right_motor_signal);
 
-    // RCLCPP_INFO(logger_, "left val : %d", left_motor_signal);
-    // RCLCPP_INFO(logger_, "right val: %d", right_motor_signal);
-
-
-
+    RCLCPP_INFO(logger_, "left val : %d", left_motor_signal);
+    RCLCPP_INFO(logger_, "right val: %d", right_motor_signal);
 
 }
 

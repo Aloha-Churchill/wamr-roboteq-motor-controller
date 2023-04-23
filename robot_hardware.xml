@@ -1,9 +1,9 @@
-<library path="diffdrive_arduino">
-  <class name="diffdrive_arduino/DiffDriveArduino"
-         type="DiffDriveArduino"
+<library path="motor_control">
+  <class name="motor_control/DiffDriveRaspberryPi"
+         type="DiffDriveRaspberryPi"
          base_class_type="hardware_interface::SystemInterface">
     <description>
-      Hardware Interface for Differential Drive Arduino controller.
+      Hardware Interface for Differential Drive rpi controller.
     </description>
   </class>
 </library>

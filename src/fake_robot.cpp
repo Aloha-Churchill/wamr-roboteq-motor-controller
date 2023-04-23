@@ -1,14 +1,10 @@
-#include "diffdrive_arduino/fake_robot.h"
-
-
+#include "motor_control/fake_robot.h"
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 
 
 FakeRobot::FakeRobot()
   : logger_(rclcpp::get_logger("FakeRobot"))
 {}
-
-
 
 return_type FakeRobot::configure(const hardware_interface::HardwareInfo & info)
 {

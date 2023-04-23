@@ -1,5 +1,5 @@
-#ifndef DIFFDRIVE_ARDUINO_ARDUINO_COMMS_H
-#define DIFFDRIVE_ARDUINO_ARDUINO_COMMS_H
+#ifndef MOTOR_CONTROL_RPI_COMMS_H
+#define MOTOR_CONTROL_RPI_COMMS_H
 
 #include <cstring>
 #include <gpiod.h>
@@ -8,13 +8,13 @@
 #include <stdlib.h>
 #include <rclcpp/rclcpp.hpp>
 
-class ArduinoComms
+class RaspberyPiComms
 {
 
 
 public:
 
-  ArduinoComms()
+  RaspberyPiComms()
   {  }
 
   void setup();
@@ -31,8 +31,8 @@ public:
       gpiod_chip* chip;
       gpiod_line* left_wheel;
       gpiod_line* right_wheel;
-      rclcpp::Logger logger_ = rclcpp::get_logger("ArduinoComms");
+      rclcpp::Logger logger_ = rclcpp::get_logger("RaspberyPiComms");
 
 };
 
-#endif // DIFFDRIVE_ARDUINO_ARDUINO_COMMS_H
+#endif // MOTOR_CONTROL_RPI_COMMS_H

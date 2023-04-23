@@ -1,4 +1,4 @@
-#include "diffdrive_arduino/wheel.h"
+#include "motor_control/wheel.h"
 
 #include <cmath>
 

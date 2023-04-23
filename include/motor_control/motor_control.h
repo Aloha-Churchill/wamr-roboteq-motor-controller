@@ -1,5 +1,5 @@
-#ifndef DIFFDRIVE_ARDUINO_REAL_ROBOT_H
-#define DIFFDRIVE_ARDUINO_REAL_ROBOT_H
+#ifndef MOTOR_CONTROL_REAL_ROBOT_H
+#define MOTOR_CONTROL_REAL_ROBOT_H
 
 #include <cstring>
 #include "rclcpp/rclcpp.hpp"
@@ -13,17 +13,17 @@
 
 #include "config.h"
 #include "wheel.h"
-#include "arduino_comms.h"
+#include "rpi_comms.h"
 
 
 using hardware_interface::return_type;
 
-class DiffDriveArduino : public hardware_interface::BaseInterface<hardware_interface::SystemInterface>
+class DiffDriveRaspberryPi : public hardware_interface::BaseInterface<hardware_interface::SystemInterface>
 {
 
 
 public:
-  DiffDriveArduino();
+  DiffDriveRaspberryPi();
 
   return_type configure(const hardware_interface::HardwareInfo & info) override;
 
@@ -44,7 +44,7 @@ public:
 private:
 
   Config cfg_;
-  ArduinoComms arduino_;
+  RaspberyPiComms rpi_;
 
   Wheel l_wheel_;
   Wheel r_wheel_;
@@ -56,4 +56,4 @@ private:
 };
 
 
-#endif // DIFFDRIVE_ARDUINO_REAL_ROBOT_H
+#endif // MOTOR_CONTROL_REAL_ROBOT_H

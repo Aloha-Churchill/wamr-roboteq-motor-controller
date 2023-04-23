@@ -1,4 +1,4 @@
-#include "diffdrive_arduino/arduino_comms.h"
+#include "motor_control/rpi_comms.h"
 #include <rclcpp/rclcpp.hpp>
 #include <algorithm>
 #include <fcntl.h>
@@ -17,7 +17,7 @@
 #define RIGHT_IN_1 14 // GPIO pin used for left wheel PWM signal
 #define RIGHT_IN_2 23 // GPIO pin used for right wheel PWM signal
 
-void ArduinoComms::setup()
+void RaspberyPiComms::setup()
 {  
     // Initialize pigpio library
     if (gpioInitialise() < 0) {
@@ -40,18 +40,18 @@ void ArduinoComms::setup()
 }
 
 
-void ArduinoComms::sendEmptyMsg()
+void RaspberyPiComms::sendEmptyMsg()
 {
 
 }
 
-void ArduinoComms::readEncoderValues(int&, int&)
+void RaspberyPiComms::readEncoderValues(int&, int&)
 {
 
 }
 
 
-void ArduinoComms::setMotorValues(int val_1, int val_2)
+void RaspberyPiComms::setMotorValues(int val_1, int val_2)
 {
     int left_motor_signal = -1*val_1;
     int right_motor_signal = -1*val_2;
@@ -105,16 +105,16 @@ void ArduinoComms::setMotorValues(int val_1, int val_2)
 }
 
 
-void ArduinoComms::setPidValues(float, float, float, float)
+void RaspberyPiComms::setPidValues(float, float, float, float)
 {
 
 }
 
-void ArduinoComms::sendMsg()
+void RaspberyPiComms::sendMsg()
 {
 
 }
-// #include "diffdrive_arduino/arduino_comms.h"
+// #include "motor_control/rpi_comms.h"
 // #include <rclcpp/rclcpp.hpp>
 // #include <algorithm>
 // #include <fcntl.h>
@@ -122,7 +122,7 @@ void ArduinoComms::sendMsg()
 // #define LEFT_WHEEL_GPIO_PIN 23
 // #define RIGHT_WHEEL_GPIO_PIN 24
 
-// void ArduinoComms::setup()
+// void RaspberyPiComms::setup()
 // {  
 //     chip = gpiod_chip_open("/dev/gpiochip0");
 //     left_wheel = gpiod_chip_get_line(chip, LEFT_WHEEL_GPIO_PIN);
@@ -136,12 +136,12 @@ void ArduinoComms::sendMsg()
 // }
 
 
-// void ArduinoComms::sendEmptyMsg()
+// void RaspberyPiComms::sendEmptyMsg()
 // {
 
 // }
 
-// void ArduinoComms::readEncoderValues(int&, int&)
+// void RaspberyPiComms::readEncoderValues(int&, int&)
 // {
 
 // }
@@ -151,7 +151,7 @@ void ArduinoComms::sendMsg()
 //   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 // }
 
-// void ArduinoComms::setMotorValues(int val_1, int val_2)
+// void RaspberyPiComms::setMotorValues(int val_1, int val_2)
 // {
 //     // Translate val_1 and val_2 to PWM signal values between 0 and 255
 //     int left_wheel_pwm = map(val_1, -20, 20, 0, 255);
@@ -174,12 +174,12 @@ void ArduinoComms::sendMsg()
 // }
 
 
-// void ArduinoComms::setPidValues(float, float, float, float)
+// void RaspberyPiComms::setPidValues(float, float, float, float)
 // {
 
 // }
 
-// void ArduinoComms::sendMsg()
+// void RaspberyPiComms::sendMsg()
 // {
 
 // }

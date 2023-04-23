@@ -1,4 +1,4 @@
-#include "diffdrive_arduino/diffdrive_arduino.h"
+#include "motor_control/motor_control.h"
 
 
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
@@ -6,12 +6,12 @@
 
 
 
-DiffDriveArduino::DiffDriveArduino()
-    : logger_(rclcpp::get_logger("DiffDriveArduino"))
+DiffDriveRaspberryPi::DiffDriveRaspberryPi()
+    : logger_(rclcpp::get_logger("DiffDriveRaspberryPi"))
 {}
 
 
-return_type DiffDriveArduino::configure(const hardware_interface::HardwareInfo & info)
+return_type DiffDriveRaspberryPi::configure(const hardware_interface::HardwareInfo & info)
 {
   if (configure_default(info) != return_type::OK) {
     return return_type::ERROR;
@@ -30,8 +30,8 @@ return_type DiffDriveArduino::configure(const hardware_interface::HardwareInfo &
   l_wheel_.setup(cfg_.left_wheel_name, cfg_.enc_counts_per_rev);
   r_wheel_.setup(cfg_.right_wheel_name, cfg_.enc_counts_per_rev);
 
-  // Set up the Arduino
-  arduino_.setup();  
+  // Set up the rpi
+  rpi_.setup();  
 
   RCLCPP_INFO(logger_, "Finished Configuration");
 
@@ -39,7 +39,7 @@ return_type DiffDriveArduino::configure(const hardware_interface::HardwareInfo &
   return return_type::OK;
 }
 
-std::vector<hardware_interface::StateInterface> DiffDriveArduino::export_state_interfaces()
+std::vector<hardware_interface::StateInterface> DiffDriveRaspberryPi::export_state_interfaces()
 {
   // We need to set up a position and a velocity interface for each wheel
 
@@ -53,7 +53,7 @@ std::vector<hardware_interface::StateInterface> DiffDriveArduino::export_state_i
   return state_interfaces;
 }
 
-std::vector<hardware_interface::CommandInterface> DiffDriveArduino::export_command_interfaces()
+std::vector<hardware_interface::CommandInterface> DiffDriveRaspberryPi::export_command_interfaces()
 {
   // We need to set up a velocity command interface for each wheel
 
@@ -66,7 +66,7 @@ std::vector<hardware_interface::CommandInterface> DiffDriveArduino::export_comma
 }
 
 
-return_type DiffDriveArduino::start()
+return_type DiffDriveRaspberryPi::start()
 {
   RCLCPP_INFO(logger_, "Starting Controller...");
 
@@ -75,7 +75,7 @@ return_type DiffDriveArduino::start()
   return return_type::OK;
 }
 
-return_type DiffDriveArduino::stop()
+return_type DiffDriveRaspberryPi::stop()
 {
   RCLCPP_INFO(logger_, "Stopping Controller...");
   status_ = hardware_interface::status::STOPPED;
@@ -83,7 +83,7 @@ return_type DiffDriveArduino::stop()
   return return_type::OK;
 }
 
-hardware_interface::return_type DiffDriveArduino::read()
+hardware_interface::return_type DiffDriveRaspberryPi::read()
 {
 
   // TODO fix chrono duration
@@ -104,10 +104,10 @@ hardware_interface::return_type DiffDriveArduino::read()
   
 }
 
-hardware_interface::return_type DiffDriveArduino::write()
+hardware_interface::return_type DiffDriveRaspberryPi::write()
 {
 
-  if (!arduino_.connected())
+  if (!rpi_.connected())
   {
     return return_type::ERROR;
   }
@@ -127,12 +127,10 @@ hardware_interface::return_type DiffDriveArduino::write()
   l_wheel_.vel = l_wheel_.cmd;
   r_wheel_.vel = r_wheel_.cmd;
 
-  arduino_.setMotorValues(l_wheel_.cmd / l_wheel_.rads_per_count / cfg_.loop_rate, r_wheel_.cmd / r_wheel_.rads_per_count / cfg_.loop_rate);
+  rpi_.setMotorValues(l_wheel_.cmd / l_wheel_.rads_per_count / cfg_.loop_rate, r_wheel_.cmd / r_wheel_.rads_per_count / cfg_.loop_rate);
 
   return return_type::OK;
 
-
-  
 }
 
 
@@ -140,6 +138,6 @@ hardware_interface::return_type DiffDriveArduino::write()
 #include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(
-  DiffDriveArduino,
+  DiffDriveRaspberryPi,
   hardware_interface::SystemInterface
 )

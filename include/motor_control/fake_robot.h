@@ -1,5 +1,5 @@
-#ifndef DIFFDRIVE_ARDUINO_FAKE_ROBOT_H
-#define DIFFDRIVE_ARDUINO_FAKE_ROBOT_H
+#ifndef MOTOR_CONTROL_FAKE_ROBOT_H
+#define MOTOR_CONTROL_FAKE_ROBOT_H
 
 
 #include "rclcpp/rclcpp.hpp"
@@ -53,4 +53,4 @@ private:
 };
 
 
-#endif // DIFFDRIVE_ARDUINO_FAKE_ROBOT_H
+#endif

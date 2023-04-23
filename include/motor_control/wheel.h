@@ -1,5 +1,5 @@
-#ifndef DIFFDRIVE_ARDUINO_WHEEL_H
-#define DIFFDRIVE_ARDUINO_WHEEL_H
+#ifndef MOTOR_CONTROL_WHEEL_H
+#define MOTOR_CONTROL_WHEEL_H
 
 #include <string>
 
@@ -31,4 +31,4 @@ class Wheel
 };
 
 
-#endif // DIFFDRIVE_ARDUINO_WHEEL_H
+#endif
